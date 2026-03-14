@@ -1,73 +1,144 @@
-# Welcome to your Lovable project
+# Compusum Landing Page
 
-## Project info
+Página de aterrizaje (landing page) oficial del proyecto **Compusum**, construida con React, TypeScript y Vite. Este repositorio forma parte del monorepo `Compusum-Frontend`.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+---
 
-## How can I edit this code?
+## 📋 Requisitos previos
 
-There are several ways of editing your application.
+Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
-**Use Lovable**
+- [Node.js](https://nodejs.org/) `v18` o superior
+- [npm](https://www.npmjs.com/) o [bun](https://bun.sh/) (el proyecto incluye lockfiles para ambos)
+- Git
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+> **Tip:** Se recomienda usar [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) para gestionar versiones de Node.js fácilmente.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🚀 Instalación y puesta en marcha
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Sigue estos pasos para correr el proyecto en tu máquina local:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# 1. Clona el repositorio principal
+git clone <URL_DEL_REPOSITORIO>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# 2. Entra al directorio de la landing
+cd Compusum-Frontend/Compusum-landing
 
-# Step 3: Install the necessary dependencies.
-npm i
+# 3. Instala las dependencias
+npm install
+# o con bun:
+bun install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 4. Inicia el servidor de desarrollo
 npm run dev
+# o con bun:
+bun dev
 ```
 
-**Edit a file directly in GitHub**
+El servidor de desarrollo se iniciará en `http://localhost:8080` (o el puerto que indique la consola) con recarga automática al guardar cambios.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 📦 Scripts disponibles
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+| Comando | Descripción |
+|---|---|
+| `npm run dev` | Inicia el servidor de desarrollo con hot-reload |
+| `npm run build` | Genera el build de producción en `/dist` |
+| `npm run build:dev` | Genera el build en modo desarrollo |
+| `npm run preview` | Previsualiza el build de producción localmente |
+| `npm run lint` | Ejecuta ESLint para detectar errores de código |
+| `npm run test` | Ejecuta los tests con Vitest |
+| `npm run test:watch` | Ejecuta los tests en modo watch |
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 🛠️ Tecnologías utilizadas
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+| Tecnología | Descripción |
+|---|---|
+| [Vite](https://vitejs.dev/) | Bundler y servidor de desarrollo ultrarrápido |
+| [React 18](https://react.dev/) | Librería principal de UI |
+| [TypeScript](https://www.typescriptlang.org/) | Tipado estático para JavaScript |
+| [Tailwind CSS](https://tailwindcss.com/) | Framework de estilos utility-first |
+| [shadcn/ui](https://ui.shadcn.com/) | Componentes de UI accesibles y personalizables |
+| [Radix UI](https://www.radix-ui.com/) | Primitivos de UI sin estilos predeterminados |
+| [React Router DOM](https://reactrouter.com/) | Enrutamiento del lado del cliente |
+| [TanStack Query](https://tanstack.com/query) | Gestión de estado y fetching de datos |
+| [React Hook Form](https://react-hook-form.com/) | Manejo de formularios con validación |
+| [Zod](https://zod.dev/) | Validación de esquemas TypeScript-first |
+| [Recharts](https://recharts.org/) | Gráficas y visualización de datos |
+| [Lucide React](https://lucide.dev/) | Iconos SVG para React |
+| [Vitest](https://vitest.dev/) | Framework de testing ultrarrápido |
+| [Playwright](https://playwright.dev/) | Testing end-to-end |
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## 📁 Estructura del proyecto
 
-## Can I connect a custom domain to my Lovable project?
+```
+Compusum-landing/
+├── public/             # Archivos estáticos públicos
+├── src/
+│   ├── components/     # Componentes reutilizables
+│   ├── pages/          # Páginas / rutas de la aplicación
+│   ├── hooks/          # Custom hooks de React
+│   ├── lib/            # Utilidades y helpers
+│   └── main.tsx        # Punto de entrada de la aplicación
+├── index.html          # HTML base
+├── vite.config.ts      # Configuración de Vite
+├── tailwind.config.ts  # Configuración de Tailwind CSS
+├── tsconfig.json       # Configuración de TypeScript
+└── package.json        # Dependencias y scripts
+```
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🏗️ Build de producción
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Para generar los archivos optimizados para producción:
+
+```sh
+npm run build
+```
+
+Los archivos resultantes se guardarán en la carpeta `/dist`, listos para desplegarse en cualquier servidor estático (Nginx, Apache, Vercel, Netlify, etc.).
+
+Para previsualizar el build antes de desplegar:
+
+```sh
+npm run preview
+```
+
+---
+
+## 🧪 Tests
+
+El proyecto usa **Vitest** para unit/integration tests y **Playwright** para tests end-to-end.
+
+```sh
+# Correr todos los tests una vez
+npm run test
+
+# Correr tests en modo watch (ideal durante desarrollo)
+npm run test:watch
+```
+
+---
+
+## 🤝 Contribución
+
+1. Haz un fork o clona el repositorio
+2. Crea una rama para tu feature o corrección: `git checkout -b feature/mi-feature`
+3. Realiza tus cambios y haz commit: `git commit -m "feat: descripción del cambio"`
+4. Sube tus cambios: `git push origin feature/mi-feature`
+5. Abre un Pull Request describiendo tus cambios
+
+---
+
+## 📄 Licencia
+
+Este proyecto es privado y propiedad de **Brackix / Compusum**. Todos los derechos reservados.
