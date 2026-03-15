@@ -9,6 +9,19 @@ const navLinks = [
   { label: "Contacto", href: "#contacto" },
 ];
 
+const handleNavClick = (
+  e: React.MouseEvent<HTMLAnchorElement>,
+  href: string,
+  closeMenu?: () => void
+) => {
+  e.preventDefault();
+  const target = document.querySelector(href);
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  closeMenu?.();
+};
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -19,20 +32,38 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Cierra el menú si se hace resize a desktop
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 1024) setOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-card/95 backdrop-blur-lg shadow-card border-b border-border"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+        ? "bg-card/95 backdrop-blur-lg shadow-card border-b border-border"
+        : "bg-black/40 backdrop-blur-sm"
+        }`}
     >
       <div className="container mx-auto flex items-center justify-between h-20 px-6">
-        <a href="#inicio" className="flex flex-col">
-          <span className={`font-display font-extrabold text-2xl tracking-tight transition-colors ${scrolled ? "text-foreground" : "text-secondary-foreground"}`}>
+        <a
+          href="#inicio"
+          onClick={(e) => handleNavClick(e, "#inicio")}
+          className="flex flex-col"
+        >
+          <span
+            className={`font-display font-extrabold text-2xl tracking-tight transition-colors ${scrolled ? "text-foreground" : "text-white drop-shadow-md"
+              }`}
+          >
             COMPUSUM
           </span>
-          <span className={`text-[10px] font-body font-medium tracking-[0.2em] uppercase transition-colors ${scrolled ? "text-muted-foreground" : "text-secondary-foreground/60"}`}>
+          <span
+            className={`text-[10px] font-body font-medium tracking-[0.2em] uppercase transition-colors ${scrolled ? "text-muted-foreground" : "text-white/80 drop-shadow-sm"
+              }`}
+          >
             Soluciones Eléctricas
           </span>
         </a>
@@ -43,9 +74,9 @@ const Navbar = () => {
             <a
               key={l.href}
               href={l.href}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                scrolled ? "text-foreground/70" : "text-secondary-foreground/80"
-              }`}
+              onClick={(e) => handleNavClick(e, l.href)}
+              className={`text-sm font-medium transition-colors hover:text-primary ${scrolled ? "text-foreground/70" : "text-white drop-shadow-sm"
+                }`}
             >
               {l.label}
             </a>
@@ -64,21 +95,29 @@ const Navbar = () => {
         {/* Mobile toggle */}
         <button
           onClick={() => setOpen(!open)}
-          className={`lg:hidden ${scrolled ? "text-foreground" : "text-secondary-foreground"}`}
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          className={`lg:hidden p-2 rounded-lg transition-colors ${scrolled
+            ? "text-foreground hover:bg-foreground/10"
+            : "text-white drop-shadow-md hover:bg-white/10 active:bg-white/20"
+            }`}
         >
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
       {/* Mobile menu */}
-      {open && (
-        <div className="lg:hidden bg-card/98 backdrop-blur-lg border-t border-border px-6 pb-6 shadow-elevated">
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-300 ${open ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+          }`}
+      >
+        <div className="bg-gray-900 border-t border-white/10 px-6 pb-6">
           {navLinks.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              onClick={() => setOpen(false)}
-              className="block py-3 text-foreground/70 hover:text-primary transition-colors font-medium border-b border-border/50"
+              onClick={(e) => handleNavClick(e, l.href, () => setOpen(false))}
+              className="block py-4 text-white font-medium border-b border-white/10 text-base active:text-amber-400"
+              style={{ color: "#ffffff" }}
             >
               {l.label}
             </a>
@@ -87,13 +126,13 @@ const Navbar = () => {
             href="https://wa.me/18295569275"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-full text-sm font-bold"
+            className="mt-5 flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3.5 rounded-full text-sm font-bold active:opacity-90"
           >
             <Phone className="w-4 h-4" />
             Contáctanos
           </a>
         </div>
-      )}
+      </div>
     </nav>
   );
 };

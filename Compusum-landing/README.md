@@ -16,7 +16,7 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
 ---
 
-## 🚀 Instalación y puesta en marcha
+## 🚀 Instalación y puesta en marchala 
 
 Sigue estos pasos para correr el proyecto en tu máquina local:
 
