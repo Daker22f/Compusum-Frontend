@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { getCompletedProjects, type CompletedProject } from "@/lib/api";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
@@ -6,17 +8,30 @@ import project4 from "@/assets/project-4.jpg";
 import project5 from "@/assets/project-5.jpg";
 import project6 from "@/assets/project-6.jpg";
 
-const projects = [
-  { image: project1, title: "Instalación Solar Residencial", category: "Fotovoltaico" },
-  { image: project2, title: "Centro de Distribución Eléctrica", category: "Instalación" },
-  { image: project3, title: "Sistema UPS Data Center", category: "Protección" },
-  { image: project4, title: "Inversores Solares", category: "Fotovoltaico" },
-  { image: project5, title: "Parque Solar Comercial", category: "Fotovoltaico" },
-  { image: project6, title: "Mantenimiento Industrial", category: "Mantenimiento" },
+const FALLBACK_PROJECTS: CompletedProject[] = [
+  { id: 1, image_url: project1, title: "Instalación Solar Residencial", category: "Fotovoltaico", description: null, year: null, order: 1 },
+  { id: 2, image_url: project2, title: "Centro de Distribución Eléctrica", category: "Instalación", description: null, year: null, order: 2 },
+  { id: 3, image_url: project3, title: "Sistema UPS Data Center", category: "Protección", description: null, year: null, order: 3 },
+  { id: 4, image_url: project4, title: "Inversores Solares", category: "Fotovoltaico", description: null, year: null, order: 4 },
+  { id: 5, image_url: project5, title: "Parque Solar Comercial", category: "Fotovoltaico", description: null, year: null, order: 5 },
+  { id: 6, image_url: project6, title: "Mantenimiento Industrial", category: "Mantenimiento", description: null, year: null, order: 6 },
 ];
 
 const ProjectsSection = () => {
   const { ref, isVisible } = useScrollReveal();
+  const [projects, setProjects] = useState<CompletedProject[]>(FALLBACK_PROJECTS);
+
+  useEffect(() => {
+    getCompletedProjects()
+      .then((data) => {
+        if (data && data.length > 0) {
+          setProjects(data);
+        }
+      })
+      .catch(() => {
+        // Mantiene el fallback si el backend no está disponible
+      });
+  }, []);
 
   return (
     <section id="proyectos" className="py-24 bg-background" ref={ref}>
@@ -37,14 +52,13 @@ const ProjectsSection = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {projects.map((p, i) => (
             <div
-              key={i}
-              className={`group relative rounded-2xl overflow-hidden cursor-pointer reveal ${isVisible ? "visible" : ""} ${
-                i === 0 || i === 4 ? "row-span-2 aspect-[3/4]" : "aspect-square"
-              }`}
+              key={p.id}
+              className={`group relative rounded-2xl overflow-hidden cursor-pointer reveal ${isVisible ? "visible" : ""} ${i === 0 || i === 4 ? "row-span-2 aspect-[3/4]" : "aspect-square"
+                }`}
               style={{ transitionDelay: `${i * 0.08}s` }}
             >
               <img
-                src={p.image}
+                src={p.image_url}
                 alt={p.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
