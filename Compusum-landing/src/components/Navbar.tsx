@@ -6,7 +6,6 @@ const navLinks = [
   { label: "Servicios", href: "#servicios" },
   { label: "Proyectos", href: "#proyectos" },
   { label: "Nosotros", href: "#nosotros" },
-  { label: "Contacto", href: "#contacto" },
 ];
 
 const handleNavClick = (
@@ -82,9 +81,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="https://wa.me/18295569275"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contacto"
             className="flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full text-sm font-bold hover:bg-amber-dark transition-all hover:shadow-lg"
           >
             <Phone className="w-4 h-4" />
@@ -123,9 +120,7 @@ const Navbar = () => {
             </a>
           ))}
           <a
-            href="https://wa.me/18295569275"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contacto"
             className="mt-5 flex items-center justify-center gap-2 bg-primary text-primary-foreground px-5 py-3.5 rounded-full text-sm font-bold active:opacity-90"
           >
             <Phone className="w-4 h-4" />

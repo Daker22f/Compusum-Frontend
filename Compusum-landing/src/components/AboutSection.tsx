@@ -29,7 +29,7 @@ const AboutSection = () => {
 
             {/* Floating card */}
             <div className="absolute -bottom-6 -right-4 md:right-8 bg-card rounded-2xl px-6 py-5 shadow-elevated">
-              <p className="font-display font-extrabold text-4xl text-foreground">+24</p>
+              <p className="font-display font-extrabold text-4xl text-foreground">+25</p>
               <p className="text-sm text-muted-foreground font-medium">Años de<br />experiencia</p>
               <div className="w-8 h-1 bg-primary rounded-full mt-2" />
             </div>
