@@ -21,9 +21,7 @@ const CtaBanner = () => {
             </p>
             <div className="flex flex-wrap gap-4">
               <a
-                href="https://wa.me/18295569275"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#contacto"
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-display font-bold hover:bg-amber-dark transition-all hover:shadow-lg group"
               >
                 Escribir por WhatsApp

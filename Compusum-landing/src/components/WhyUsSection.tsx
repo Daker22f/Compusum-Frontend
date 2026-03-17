@@ -46,7 +46,7 @@ const WhyUsSection = () => {
               La diferencia está en <span className="text-primary">nuestro equipo</span>
             </h2>
             <p className="text-secondary-foreground/60 font-body leading-relaxed mb-8 text-base">
-              Más de 24 años de experiencia nos respaldan. Somos más que una empresa de servicios eléctricos — somos tu socio de confianza para proteger y optimizar tu energía.
+              Más de 25 años de experiencia nos respaldan. Somos más que una empresa de servicios eléctricos — somos tu socio de confianza para proteger y optimizar tu energía.
             </p>
 
             <a

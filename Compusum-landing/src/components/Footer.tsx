@@ -9,7 +9,7 @@ const Footer = () => (
           <p className="font-display font-extrabold text-2xl text-primary mb-1">COMPUSUM</p>
           <p className="text-[10px] text-secondary-foreground/40 tracking-[0.2em] uppercase mb-4">Soluciones Eléctricas SRL</p>
           <p className="text-sm text-secondary-foreground/50 font-body leading-relaxed">
-            La solución en tus manos. Más de 24 años brindando servicios eléctricos de excelencia en República Dominicana.
+            La solución en tus manos. Más de 25 años brindando servicios eléctricos de excelencia en República Dominicana.
           </p>
         </div>
 

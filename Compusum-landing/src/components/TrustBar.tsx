@@ -2,7 +2,7 @@ import { Calendar, MapPin, Clock, Shield } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const stats = [
-  { icon: Calendar, label: "Años de experiencia", value: "+24" },
+  { icon: Calendar, label: "Años de experiencia", value: "+25" },
   { icon: MapPin, label: "Cobertura Nacional RD", value: "100%" },
   { icon: Clock, label: "Disponibilidad", value: "24/7" },
   { icon: Shield, label: "Equipo Certificado", value: "A+" },

@@ -60,6 +60,46 @@ const ContactSection = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handleWhatsAppContact = async () => {
+    // Basic validation
+    if (!form.name || !form.email || !form.phone || !form.service_type || !form.message) {
+      setError("Por favor completa todos los campos requeridos.");
+      return;
+    }
+
+    setSubmitting(true);
+    setError(null);
+    try {
+      // 1. Enviar al backend
+      await postServiceRequest(form);
+
+      // 2. Preparar mensaje de WhatsApp
+      const message = `*Nueva Solicitud de Servicio*\n\n` +
+        `*Nombre:* ${form.name}\n` +
+        `*Servicio:* ${form.service_type}\n` +
+        `*Teléfono:* ${form.phone}\n` +
+        `*Email:* ${form.email}\n` +
+        `*Mensaje:* ${form.message}`;
+
+      const whatsappUrl = `https://wa.me/${settings.whatsapp_number}?text=${encodeURIComponent(message)}`;
+
+      // 3. Abrir WhatsApp en una nueva pestaña
+      window.open(whatsappUrl, '_blank');
+
+      // 4. Marcar como enviado y limpiar formulario
+      setSubmitted(true);
+      setForm({ name: "", email: "", phone: "", service_type: "", message: "" });
+    } catch (err: unknown) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Ocurrió un error al procesar tu solicitud."
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -259,20 +299,20 @@ const ContactSection = () => {
 
               {/* Submit */}
               <div className="sm:col-span-2 flex flex-col sm:flex-row gap-4 items-center justify-between pt-2">
-                <a
-                  href={`https://wa.me/${settings.whatsapp_number}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-success text-accent-foreground px-8 py-4 rounded-full font-display font-bold text-sm hover:opacity-90 transition-all hover:shadow-lg"
+                <button
+                  type="button"
+                  onClick={handleWhatsAppContact}
+                  disabled={submitting}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-success text-accent-foreground px-8 py-4 rounded-full font-display font-bold text-sm hover:opacity-90 transition-all hover:shadow-lg disabled:opacity-60"
                 >
                   <Phone className="w-4 h-4" />
                   Contactar por WhatsApp
-                </a>
+                </button>
 
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-display font-bold text-sm hover:bg-amber-dark transition-all hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-full font-display font-bold text-sm hover:bg-amber-dark transition-all hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {submitting ? (
                     "Enviando…"
@@ -289,6 +329,7 @@ const ContactSection = () => {
         </div>
       </div>
     </section>
+
   );
 };
 

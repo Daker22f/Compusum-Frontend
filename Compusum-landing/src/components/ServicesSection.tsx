@@ -120,9 +120,7 @@ const ServicesSection = () => {
                   <h3 className="font-display font-bold text-lg text-foreground mb-2">{s.title}</h3>
                   <p className="text-sm text-muted-foreground font-body mb-5 leading-relaxed">{s.description}</p>
                   <a
-                    href="https://wa.me/18295569275"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#contacto"
                     className="inline-flex items-center gap-2 text-sm font-display font-semibold text-primary hover:text-amber-dark transition-colors group/link"
                   >
                     Solicitar Cotización
